@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Animasyon Akademisi</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6200ea">
+</head>
+<body>
+    <canvas id="confetti-canvas"></canvas>
+    <div id="achievement-toast">Keyframe Added! 💎</div>
+
+    <div class="container">
+        <div class="top-bar">
+            <button class="icon-btn" onclick="app.showHome()">🏠</button>
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Render, Keyframe, After..." oninput="app.search(this.value)">
+            </div>
+            <button class="icon-btn" onclick="app.toggleTheme()">🎬</button>
+        </div>
+
+        <!-- Home View -->
+        <div id="view-home" class="view active">
+            <header>
+                <h1>Grafik Canlandırma</h1>
+                <p>MOTION DESIGN STUDIO</p>
+            </header>
+            
+            <div id="exam-grid" class="grid">
+                <!-- Cards will be injected -->
+            </div>
+        </div>
+
+        <!-- Selection View -->
+        <div id="view-selection" class="view">
+            <header>
+                <h2 id="selected-title">Kompozisyon Ayarları</h2>
+                <div class="badge-container" id="badges"></div>
+            </header>
+            
+            <div class="grid">
+                <div class="card glow-card" onclick="app.startSummary()" style="grid-column: 1 / -1; border-color: var(--primary); background: linear-gradient(135deg, rgba(98, 0, 234, 0.1), transparent);">
+                    <span class="card-icon">📖</span>
+                    <h3 class="card-title">Hızlı Konu Özeti</h3>
+                    <p class="card-desc">Sınav öncesi render almadan önce kilit bilgileri oku.</p>
+                </div>
+                <div class="card glow-card" onclick="app.startStudy()">
+                    <span class="card-icon">📚</span>
+                    <h3 class="card-title">Ders Notları</h3>
+                    <p class="card-desc">Katmanlar ve araçlar hakkındaki tüm detaylar.</p>
+                </div>
+                <div class="card glow-card" onclick="app.startFlashcards()">
+                    <span class="card-icon">🎴</span>
+                    <h3 class="card-title">Kısayol Kartları</h3>
+                    <p class="card-desc">P, S, R, T gibi can alıcı kısayolları ezberle.</p>
+                </div>
+                <div class="card glow-card" onclick="app.startGame('tf')">
+                    <span class="card-icon">⚡</span>
+                    <h3 class="card-title">Hızlı Karar</h3>
+                    <p class="card-desc">Doğru/Yanlış oyunuyla teorik bilgisini ölç.</p>
+                </div>
+                <div class="card glow-card" onclick="app.startGame('word')">
+                    <span class="card-icon">🧩</span>
+                    <h3 class="card-title">Terim Bulmaca</h3>
+                    <p class="card-desc">Gizli görsel efekt terimlerini tahmin et.</p>
+                </div>
+                <div class="card glow-card" onclick="app.startGame('test')">
+                    <span class="card-icon">📝</span>
+                    <h3 class="card-title">Sınav Projesi</h3>
+                    <p class="card-desc">10 soruluk interaktif deneme sınavı.</p>
+                </div>
+                <div class="card glow-card" onclick="app.startGame('time')">
+                    <span class="card-icon">⏳</span>
+                    <h3 class="card-title">Timeline Yarışı</h3>
+                    <p class="card-desc">Süre dolmadan en çok soruyu bil.</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 3rem; text-align: center;">
+                <button class="btn btn-secondary" onclick="app.printNotes()">🖨️ PROJE NOTLARINI DIŞA AKTAR (PDF)</button>
+            </div>
+        </div>
+
+        <!-- Content View -->
+        <div id="view-content" class="view">
+            <div class="nav-header">
+                <button class="btn" onclick="app.showSelection(app.activeExam)">⬅ Timeline</button>
+                <div id="game-status"></div>
+            </div>
+            <div id="content-container"></div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal-result" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="app.closeModal()">&times;</span>
+            <div id="result-body"></div>
+        </div>
+    </div>
+
+    <div id="print-area"></div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 <a href="https://fatihpatir.github.io/web" target="_blank" class="footer-name">Fatih PATIR</a></p>
+            <p class="footer-location">Korkuteli / Antalya</p>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js');
+            });
+        }
+    </script>
+</body>
+</html>
