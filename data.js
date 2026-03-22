@@ -2,7 +2,7 @@ const EXAM_DATA = [
   {
     id: '1-1',
     title: '1. Sınav: Görüntü İşleme',
-    summary: '<b>Arayüz ve Araçlar:</b> Photoshop arayüzü, seçim araçları, kesme ve rötuş araçlarını kapsar. <br><br><b>Renk Modları:</b> Dijital için RGB, baskı için CMYK kullanılır. Katmanlar (Layers) çalışma düzenini sağlar; Actions ise toplu işlemleri otomatiğe bağlar.',
+    summary: 'Bu ünite, dijital görüntülerin oluşturulması, düzenlenmesi ve iyileştirilmesi süreçlerini kapsar.<br><br><b>Temel Kavramlar:</b> Görüntüler piksellerden oluşur. Baskı için genellikle 300 Pixels/Inch çözünürlük istenirken, web için 72 Pixels/Inch yeterlidir. Baskı işlerinde boya esaslı CMYK, dijital ekranlarda ise ışık esaslı RGB renk modu kullanılır.<br><br><b>Seçim ve Kesme Araçları:</b> Görüntünün sadece bir kısmında işlem yapmak için seçim araçları kullanılır. Magic Wand benzer renkleri tolerans değerine göre seçer. Crop Tool görüntüyü kırparken, Perspective Crop perspektif hatalarını düzelterek kırpma yapar.<br><br><b>Katman (Layer) Mantığı:</b> Çalışmaların karışıklık yaşanmadan yönetilmesini sağlar. Katmanlar gizlenebilir, kilitlenebilir, gruplandırılabilir veya tek bir katmanda birleştirilebilir. Opacity değeriyle katmanların saydamlığı ayarlanırken, Blending Modes ile katmanların birbirine nasıl karışacağı belirlenir.<br><br><b>Otomasyon ve Web Tasarımı:</b> Actions paneli, yapılan işlemleri kaydedip birden fazla görsele aynı anda uygulamayı (Batch) sağlar. Web arayüzü tasarımında Artboards farklı cihaz boyutlarını simüle ederken, Slice Tool tasarımı bölümlere ayırıp link vermeyi sağlar.',
     questions: [
       { q: "Seçimi tersine çevirmek için hangi kısayol kullanılır?", a: "Shift + Ctrl + I" },
       { q: "Baskı alınacak bir görselde hangi renk modu seçilmelidir?", a: "CMYK" },
@@ -36,12 +36,24 @@ const EXAM_DATA = [
       { front: "Filter Gallery", back: "Görüntüye çeşitli efektler uygulama alanı." },
       { front: "Quick Export PNG", back: "Belgeyi hızla PNG olarak dışa aktarma." },
       { front: "Ruler Tool", back: "Uzaklık ve açı ölçme aracı." }
+    ],
+    openEnded: [
+      { q: "Görüntü işlemede çözünürlük (Resolution) kavramını açıklayınız ve baskı için genellikle tercih edilen standart değeri yazınız.", a: "Çözünürlük, birim alan (genellikle inç) başına düşen piksel sayısını ifade eder. Baskı işlemleri için genellikle tercih edilen standart çözünürlük değeri 300 Pixels/Inch'tir." },
+      { q: "RGB ve CMYK renk modları arasındaki temel fark nedir? Hangi mod hangi amaçla kullanılır?", a: "RGB ışıkla oluşturulan (Kırmızı, Yeşil, Mavi) bir renk modudur ve dijital ekranlar için kullanılır; CMYK ise boyalarla oluşturulan (Ciyan, Macenta, Sarı, Siyah) bir renk modudur ve matbaa/baskı işleri için tercih edilir." },
+      { q: "\"Magic Wand Tool\" (Sihirli Değnek) aracının çalışma mantığını kısaca açıklayınız.", a: "Bu araç, belirlenen tolerans değerine göre, tıklanan noktadaki renge benzer olan alanları otomatik olarak seçmek için kullanılır." },
+      { q: "Katman (Layer) mantığının tasarımcıya sağladığı en büyük avantaj nedir?", a: "Katmanlar, yapılan çalışmaların kontrollü ve düzenli olmasını sağlar; her nesnenin ayrı bir seviyede tutulması sayesinde bir katmandaki işlem diğer katmanları etkilemeden düzenlenebilir." },
+      { q: "\"Patch Tool\" (Yama Aracı) ne işe yarar?", a: "Bir desen veya doku örneğini kullanarak, görüntü üzerindeki kusurlu alanların onarılmasını sağlar." },
+      { q: "\"Actions\" (Eylemler) paneli hangi durumlarda kullanıcıya kolaylık sağlar?", a: "Birden fazla fotoğrafa aynı boyutu veya efekti toplu olarak uygulamak gerektiğinde, yapılan işlemleri kaydedip tek tuşla tekrar kullanmayı sağlayarak zaman kazandırır." },
+      { q: "Web tasarımı sürecinde kullanılan \"Slice Tool\" (Dilimleme Aracı) ne amaçla kullanılır?", a: "Hazırlanan web arayüzünü bölümlere ayırmak, bu bölümlere link (bağlantı) vermek ve dosyaların web sayfasında hızlı yüklenmesini sağlamak amacıyla kullanılır." },
+      { q: "\"Rasterize Layer\" (Katmanı Rasterleştir) komutu metin katmanları üzerinde ne gibi bir değişiklik yapar?", a: "Yazılabilir ve düzenlenebilir durumdaki metin katmanını, üzerine filtre veya boyama işlemleri yapılabilecek bir resim katmanına dönüştürür." },
+      { q: "\"Tsume\" ayarı metin düzenlemede neyi ifade eder?", a: "Karakterler arasındaki boşlukların belirli bir oranda sıkıştırılmasını sağlar." },
+      { q: "Bir görseldeki perspektif bozulmalarını düzelterek kırpma yapmak için hangi araç kullanılır?", a: "Perspective Crop Tool kullanılır." }
     ]
   },
   {
     id: '1-2',
     title: '2. Sınav: Efekt Yazılımı Temelleri',
-    summary: '<b>After Effects Temelleri:</b> Project, Composition ve Timeline ana panellerdir. <br><br><b>Transform:</b> Position (P), Scale (S), Rotation (R) ve Opacity (T) temel kısayollardır. Render işlemleri için Render Queue veya Media Encoder kullanılır.',
+    summary: 'Görsel efekt yazılımı; animasyon oluşturmak ve videolar üzerinde 2D/3D efektler uygulamak için kullanılır.<br><br><b>Arayüz ve Dosya Aktarımı:</b> Temel paneller Project (dosyaların toplandığı yer), Composition (çalışma sahnesi) ve Timeline (zaman çizgisi) panelidir. Dosyalar içeri aktarılırken (Import), katmanlı dosyalar tek parça olarak (Footage) veya katman yapısını koruyarak (Composition) alınabilir.<br><br><b>Transform (Dönüştürme) İşlemleri:</b> Beş temel özellik nesneleri hareket ettirmek için esastır: Anchor Point (merkez noktası), Position (konum), Scale (büyüklük), Rotation (döndürme) ve Opacity (şeffaflık).<br><br><b>Ön İzleme ve Çıktı:</b> Yapılan işlemler Preview panelinden space (boşluk) tuşuyla izlenir. Projenin nihai hali için Render Queue (çıktı kuyruğu) veya Media Encoder kullanılır. Render sırasında görüntü kalitesi için Best Quality ve Full Resolution tercih edilmelidir.',
     questions: [
       { q: "Katmanlı bir dosyayı tüm katmanlarıyla aktarmak için hangi seçenek kullanılır?", a: "Import As > Composition" },
       { q: "Nesnenin hareket merkezini değiştiren araç hangisidir?", a: "Pan Behind (Anchor Point) Tool" },
@@ -75,12 +87,24 @@ const EXAM_DATA = [
       { front: "Ctrl + D", back: "Katmanı çoğaltma (Duplicate) kısayolu." },
       { front: "Info Paneli", back: "Renkli ve konum bilgilerini gösteren panel." },
       { front: "Preview", back: "Animasyonun ön izlemesini yapma." }
+    ],
+    openEnded: [
+      { q: "Görsel efekt yazılımında \"Composition\" (Kompozisyon) kavramını tanımlayınız.", a: "Resim, video ve ses dosyalarının bir araya getirilerek hareketli görüntülerin oluşturulduğu ana çalışma sahnesidir." },
+      { q: "Materyalleri içe aktarırken (Import) \"Footage\" ve \"Composition\" seçenekleri arasındaki fark nedir?", a: "Footage, materyali tek bir katman olarak aktarırken; Composition, katmanlı dosyaları (örneğin bir Photoshop dosyası) tüm katman yapısını koruyarak aktarır." },
+      { q: "Görsel efekt yazılımındaki 5 temel \"Transform\" (Dönüştürme) özelliğini yazınız.", a: "Anchor Point (Çıpa Noktası), Position (Konum), Scale (Ölçek), Rotation (Döndürme) ve Opacity (Saydamlık)." },
+      { q: "\"Pan Behind (Anchor Point) Tool\" aracının görevi nedir?", a: "Nesnenin merkez (çıpa) noktasını değiştirmeye yarar, böylece döndürme veya ölçeklendirme bu yeni merkeze göre yapılır." },
+      { q: "\"Keyframe\" (Anahtar Kare) kavramı animasyon oluşturmada ne ifade eder?", a: "Zaman çizelgesi üzerinde bir özelliğin değerinin değiştiği noktayı ifade eder; hareket oluşturmak için en az iki anahtar kare gereklidir." },
+      { q: "Projeyi tam ekran olarak ön izlemek için hangi panelden hangi seçenek işaretlenmelidir?", a: "Preview panelinden Full Screen seçeneği işaretlenmelidir." },
+      { q: "\"Media Encoder\" programı hangi amaçla kullanılır?", a: "Hazırlanan projeleri farklı formatlarda (örneğin .avi veya .mp4) ve kalitelerde çıktı (render) almak için kullanılır." },
+      { q: "\"Pre-composition\" (Ön Kompozisyon) oluşturmanın temel amacı nedir?", a: "Çok sayıda katmanı tek bir grup haline getirerek katman panelindeki karmaşayı önlemek ve işlemleri kolaylaştırmaktır." },
+      { q: "\"Timeline\" (Zaman Çizelgesi) panelindeki zaman işaretçisine (Current Time Indicator) verilen kısa isim nedir?", a: "CTI." },
+      { q: "Çalışma alanındaki panelleri varsayılan haline geri döndürmek için hangi menü yolu izlenir?", a: "Window > Workspace > Reset \"Default\" to Saved Layout yolu izlenir." }
     ]
   },
   {
     id: '2-1',
     title: '3. Sınav: Hareketli Görüntüler',
-    summary: '<b>Gelişmiş Teknikler:</b> Graph Editor ile hız ayarı, Parenting ile hiyerarşi ve Null Object ile kontrol sağlanır. <br><br><b>Değiştiriciler:</b> Şekil katmanlarında Repeater ve Trim Paths kullanılır. Puppet Tool ile durağan resimler canlandırılır.',
+    summary: 'Bu aşamada nesnelerin zaman içindeki değişimleri (animasyon) derinleştirilir.<br><br><b>Anahtar Kare (Keyframe) Mantığı:</b> Bir özelliğin değerinin zamanla değiştiği noktalardır. Hareketin hızını ve yumuşaklığını grafiksel bir eğri üzerinden ayarlamak için Graph Editor kullanılır. Easy Ease (F9) hareketi başlangıç ve bitişte daha doğal ve akışkan hale getirir.<br><br><b>Katman İlişkileri:</b> Çok fazla katmanla çalışırken karmaşayı önlemek için katmanlar bir grup haline getirilerek Pre-composition oluşturulur. Parenting (Ebeveynlik) özelliğiyle bir katmanın hareketi diğerine otomatik aktarılır. Sahnede görünmeyen Null Object ise diğer katmanları kontrol eden bir merkez görevi görür.<br><br><b>Gelişmiş Araçlar:</b> Puppet Pin Tool ile sabit resimlere eklem noktaları eklenerek karakter canlandırma yapılır. Şekil katmanlarında kullanılan Repeater (çoğaltma), Trim Paths (çizgisel çizim) ve Wiggle Paths (titreme/sallanma) gibi değiştiriciler kompleks animasyonlar oluşturur.',
     questions: [
       { q: "Hangi araç nesnelere bağlantı noktası ekleyerek onları kukla gibi hareket ettirir?", a: "Puppet Pin Tool" },
       { q: "Bir şekli 6 adet kopya yapmak için hangi düzenleyici kullanılır?", a: "Repeater" },
@@ -114,12 +138,24 @@ const EXAM_DATA = [
       { front: "Space", back: "Ön izlemeyi başlatma/durdurma." },
       { front: "Alt + Click", back: "Kronometreye basıp Expression ekleme." },
       { front: "Dashes", back: "Çizgiyi kesikli hale getirme özelliği." }
+    ],
+    openEnded: [
+      { q: "\"Graph Editor\" (Grafik Editörü) animasyonlarda neyi kontrol etmek için kullanılır?", a: "Hareketin hızını ve zamanlamasını grafiksel bir eğri üzerinden daha hassas bir şekilde ayarlamak için kullanılır." },
+      { q: "\"Parenting\" (Ebeveynlik) özelliğinin çalışma prensibini açıklayınız.", a: "Bir katmanı (Child) diğer bir katmana (Parent) bağlayarak, ebeveyn katmanda yapılan hareketlerin otomatik olarak bağlı katmana da aktarılmasını sağlar." },
+      { q: "\"Null Object\" (Boş Nesne) nedir ve ne amaçla kullanılır?", a: "Sahnede görünmeyen ancak diğer katmanları kendine bağlayarak onları tek bir merkezden kontrol etmeye yarayan yardımcı bir katmandır." },
+      { q: "\"Repeater\" (Tekrarlayıcı) değiştiricisi şekil katmanlarında ne işe yarar?", a: "Bir şekli belirlenen sayı ve mesafede otomatik olarak çoğaltmaya yarar." },
+      { q: "\"Trim Paths\" komutu şekil animasyonlarında nasıl bir etki yaratır?", a: "Bir çizginin veya yolun belirlenen süre içerisinde sıfırdan başlayarak çizilmesini veya sondan başa doğru kaybolmasını sağlar." },
+      { q: "\"Puppet Position Pin Tool\" aracının işlevi nedir?", a: "Hareketsiz resim veya videolardaki nesnelere eklem noktaları ekleyerek onları bir kukla gibi hareket ettirmeyi sağlar." },
+      { q: "\"Easy Ease\" (F9) özelliği animasyona ne katar?", a: "Hareketin başlangıç ve bitiş noktalarında daha yumuşak, gerçekçi ve akıcı bir geçiş (yavaşlama/hızlanma) sağlar." },
+      { q: "\"Source Text\" özelliği kullanılarak metin katmanında ne tür bir animasyon yapılabilir?", a: "Yazılan metnin içeriğinin (karakterlerin) zaman çizelgesinde anahtar kareler yardımıyla değişmesi (örneğin 5'ten 0'a sayma) sağlanabilir." },
+      { q: "\"Wiggle Paths\" özelliği şekillere nasıl bir efekt verir?", a: "Şeklin kenarlarına rastgele sallanma, titreme veya pürüzlenme etkisi verir." },
+      { q: "\"Motion Blur\" (Hareket Bulanıklığı) özelliğinin animasyonlardaki rolü nedir?", a: "Hızlı hareket eden nesnelere gözün alışık olduğu doğal bir bulanıklık ekleyerek animasyonun daha profesyonel görünmesini sağlar." }
     ]
   },
   {
     id: '2-2',
     title: '4. Sınav: Maskeleme ve VFX',
-    summary: '<b>Görsel Efektler:</b> Chroma Key (Yeşil Perde) ve Rotoskop teknikleri ile arka plan temizleme işlenir. <br><br><b>3D Dünyası:</b> 3D Layer, Kamera ve Işık kullanımıyla derinlik sağlanır. Scriptler (Wiggle, Time) ile hareket otomatiği kurulur.',
+    summary: 'Bu ünite, gerçek görüntülerle dijital unsurların profesyonelce birleştirilmesini konu alır.<br><br><b>Maskeleme Teknikleri:</b> Bir içeriğin sadece belirli alanlarını göstermek için kullanılır. Alpha Matte maskelemede üst katmanın şekli, Luma Matte maskelemede ise parlaklık değerleri referans alınır. Hareketli videolarda nesneleri ayırmak için fırça tabanlı Roto Brush aracı kullanılır.<br><br><b>Yeşil Perde (Greenbox):</b> Chroma Key işlemiyle tek renkli (genellikle yeşil) arka plan saydamlaştırılır. Bu işlem için en yaygın kullanılan efekt Keylight 1.2\'dir. Başarılı bir çekim için arka planın eşit aydınlatılması ve öznenin yeşil giyinmemesi şarttır.<br><br><b>3D Uzay ve Çevresel Etkiler:</b> Nesnelere Z ekseni kazandırılarak derinlik verilir. 3D Camera Tracker videonun hareketini analiz ederek yazı veya logoların sahneye sabitlenmesini sağlar. Sahneye eklenen Işık (Light) nesneleriyle gerçekçi gölgeler (Casts Shadows) oluşturulur.<br><br><b>Expression (Kodlama):</b> Alt tuşuna basılı tutarak kronometreye tıklandığında açılan bölüme komutlar yazılarak otomatik hareketler sağlanır (Örn: wiggle sarsıntı verir, time sürekli hareket sağlar).',
     questions: [
       { q: "Yeşil perde çekiminde özne üzerinde hangi renk bulunmamalıdır?", a: "Yeşil" },
       { q: "Hareketli videodaki kişiyi ayırmak için en uygun araç nedir?", a: "Roto Brush" },
@@ -153,6 +189,18 @@ const EXAM_DATA = [
       { front: "Two-Node Cam", back: "Konumu ve bakış noktası olan kamera." },
       { front: "Inverted", back: "Maske alanını tersine çevirme." },
       { front: "Fractal Noise", back: "Rastgele doku ve gürültü efekti." }
+    ],
+    openEnded: [
+      { q: "\"Chroma Key\" (Yeşil Perde) tekniği kullanılırken video öznesi üzerinde neden yeşil renkli kıyafet bulunmamalıdır?", a: "Çünkü yazılım yeşil rengi saydamlaştırmak için seçtiğinde, kişinin üzerindeki yeşil kıyafetler de saydamlaşacak ve arka plan o kısımlarda görünecektir." },
+      { q: "\"Keylight (1.2)\" efekti hangi temel işlem için kullanılır?", a: "Yeşil veya mavi perde (Greenbox/Bluebox) çekimlerinde arka plan rengini tek tıkla temizleyip saydam hale getirmek için kullanılır." },
+      { q: "\"Alpha Matte\" ile \"Luma Matte\" maskeleme yöntemleri arasındaki temel fark nedir?", a: "Alpha Matte maskelemede üst katmanın şekli ve saydamlığı referans alınırken; Luma Matte maskelemede üst katmanın parlaklık (ışık) değerleri referans alınır." },
+      { q: "\"Roto Brush Tool\" aracı hangi durumlarda Pen aracından daha avantajlıdır?", a: "Hareketli videolarda, karmaşık bir nesneyi (örneğin saçları olan bir insanı) arka plandan ayırmak için fırça ile boyama yaparak daha hızlı sonuç verdiği durumlarda avantajlıdır." },
+      { q: "\"3D Camera Tracker\" efektinin temel işlevi nedir?", a: "Videodaki kamera hareketlerini analiz ederek sahneye üç boyutlu bir derinlik verisi kazandırır ve videodaki nesnelere yazı veya logoların sanki oradaymış gibi sabitlenmesini sağlar." },
+      { q: "\"Adjustment Layer\" (Ayar Katmanı) nedir ve neden kullanılır?", a: "Üzerine eklenen efektleri, altındaki tüm katmanlara aynı anda uygulayan saydam bir katmandır; toplu efekt kontrolü sağlar." },
+      { q: "Bir maskenin kenarlarındaki keskinliği yumuşatmak için hangi özellik kullanılır?", a: "Mask Feather özelliği kullanılır." },
+      { q: "\"Expression\" (İfade) yazmak için hangi tuşa basılı tutularak kronometreye tıklanmalıdır?", a: "Alt tuşuna basılı tutularak tıklanmalıdır." },
+      { q: "\"Two-Node Camera\"nın standart kameradan farkı nedir?", a: "Hem bir konumu hem de baktığı bir hedef noktası (Point of Interest) vardır, bu da kamera hareketlerini daha kontrollü yapmayı sağlar." },
+      { q: "\"Cast Shadows\" (Gölge Oluştur) özelliği hangi katman ayarlarında bulunur?", a: "Üç boyutlu katmanların Material Options (Materyal Seçenekleri) bölümünde ve Işık nesnesinin ayarlarında bulunur." }
     ]
   }
 ];

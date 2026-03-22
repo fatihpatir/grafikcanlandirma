@@ -67,6 +67,13 @@ const app = {
     this.showView('view-content');
   },
 
+  startOpenEnded() {
+    const c = document.getElementById('content-container');
+    c.innerHTML = `<h2 style="font-family:'Orbitron'; margin-bottom:2.5rem; color:var(--accent); text-align:center;">${this.activeExam.title} / Açık Uçlu Hazırlık</h2>${this.activeExam.openEnded.map((q, i) => `<div class="q-card" style="margin-bottom:2rem;"><div class="q-num">SORU ${i+1}</div><p class="q-text" style="font-weight:bold; font-size:1.1rem; margin-bottom:1rem; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:10px;">${q.q}</p><p class="a-text" style="color:var(--accent); line-height:1.6; font-size:1.05rem;"><strong style="color:#fff;">Cevap:</strong> ${q.a}</p></div>`).join('')}`;
+    this.saveProgress('openEnded');
+    this.showView('view-content');
+  },
+
   startStudy() {
     const c = document.getElementById('content-container');
     c.innerHTML = `<h2 style="font-family:'Orbitron'; margin-bottom:2.5rem;">${this.activeExam.title} / Arşiv</h2>${this.activeExam.questions.map((q, i) => `<div class="q-card"><div class="q-num">SOURCE ${i+1}</div><p class="q-text">${q.q}</p><p class="a-text">${q.a}</p></div>`).join('')}`;
@@ -155,14 +162,19 @@ const app = {
 
   renderBadges() {
     const c = document.getElementById('badges');
-    const types = ['study', 'flash', 'game'];
-    const icons = { study: '📚', flash: '🎴', game: '🎮' };
+    const types = ['openEnded', 'study', 'flash', 'game'];
+    const icons = { openEnded: '🧠', study: '📚', flash: '🎴', game: '🎮' };
     c.innerHTML = types.map(t => `<span class="badge ${this.progress[this.activeExam.id]?.[t] ? 'earned' : ''}" style="padding:10px 18px; border-radius:10px; border:1px solid var(--glass-border); margin-right:8px; display:inline-block; font-size:1.1rem; filter: grayscale(${this.progress[this.activeExam.id]?.[t] ? 0 : 1}); opacity: ${this.progress[this.activeExam.id]?.[t] ? 1 : 0.3}"> ${icons[t]}</span>`).join('');
   },
 
   printNotes() {
     const a = document.getElementById('print-area');
-    a.innerHTML = `<div style="text-align:center"><h1 style="font-family:sans-serif">${this.activeExam.title} - Grafik Canlandırma Notları</h1><p>Editör: Fatih PATIR</p></div><hr>${this.activeExam.questions.map(q => `<div style="margin-bottom:20px; padding:15px; border-bottom:1px solid #ddd"><strong>📽️ ${q.q}</strong><br><br>💎 ${q.a}</div>`).join('')}`;
+    let html = `<div style="text-align:center"><h1 style="font-family:sans-serif">${this.activeExam.title} - Grafik Canlandırma Notları</h1><p>Editör: Fatih PATIR</p></div><hr>`;
+    html += `<h2 style="margin-top:30px;">Açık Uçlu Sınav Soruları</h2>`;
+    html += this.activeExam.openEnded.map(q => `<div style="margin-bottom:20px; padding:15px; border-bottom:1px solid #ddd"><strong>🧠 ${q.q}</strong><br><br>💎 ${q.a}</div>`).join('');
+    html += `<h2 style="margin-top:30px;">Diğer Çalışma Soruları</h2>`;
+    html += this.activeExam.questions.map(q => `<div style="margin-bottom:20px; padding:15px; border-bottom:1px solid #ddd"><strong>📽️ ${q.q}</strong><br><br>💎 ${q.a}</div>`).join('');
+    a.innerHTML = html;
     window.print();
   },
 
