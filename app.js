@@ -59,8 +59,9 @@ const app = {
         <div class="q-card" style="line-height:1.8; font-size:1.1rem; border-left:6px solid var(--accent); background:#000;">
           ${this.activeExam.summary}
         </div>
-        <div style="text-align:center; margin-top:2.5rem;">
+        <div style="text-align:center; margin-top:2.5rem; display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
           <button class="btn" onclick="app.startStudy()">📚 PROJE DOSYALARINI AÇ</button>
+          <button class="btn btn-secondary" onclick="app.printSummary()">🖨️ ÖZETİ PDF İNDİR</button>
         </div>
       </div>
     `;
@@ -69,7 +70,13 @@ const app = {
 
   startOpenEnded() {
     const c = document.getElementById('content-container');
-    c.innerHTML = `<h2 style="font-family:'Orbitron'; margin-bottom:2.5rem; color:var(--accent); text-align:center;">${this.activeExam.title} / Açık Uçlu Hazırlık</h2>${this.activeExam.openEnded.map((q, i) => `<div class="q-card" style="margin-bottom:2rem;"><div class="q-num">SORU ${i+1}</div><p class="q-text" style="font-weight:bold; font-size:1.1rem; margin-bottom:1rem; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:10px;">${q.q}</p><p class="a-text" style="color:var(--accent); line-height:1.6; font-size:1.05rem;"><strong style="color:#fff;">Cevap:</strong> ${q.a}</p></div>`).join('')}`;
+    c.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2.5rem; flex-wrap:wrap;">
+          <h2 style="font-family:'Orbitron'; color:var(--accent); margin:0;">${this.activeExam.title} / Açık Uçlu</h2>
+          <button class="btn btn-secondary" style="padding:0.7rem 1.2rem; font-size:0.7rem;" onclick="app.printOpenEnded()">🖨️ PDF İNDİR</button>
+      </div>
+      ${this.activeExam.openEnded.map((q, i) => `<div class="q-card" style="margin-bottom:2rem;"><div class="q-num">SORU ${i+1}</div><p class="q-text" style="font-weight:bold; font-size:1.1rem; margin-bottom:1rem; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:10px;">${q.q}</p><p class="a-text" style="color:var(--accent); line-height:1.6; font-size:1.05rem;"><strong style="color:#fff;">Cevap:</strong> ${q.a}</p></div>`).join('')}
+    `;
     this.saveProgress('openEnded');
     this.showView('view-content');
   },
@@ -167,13 +174,35 @@ const app = {
     c.innerHTML = types.map(t => `<span class="badge ${this.progress[this.activeExam.id]?.[t] ? 'earned' : ''}" style="padding:10px 18px; border-radius:10px; border:1px solid var(--glass-border); margin-right:8px; display:inline-block; font-size:1.1rem; filter: grayscale(${this.progress[this.activeExam.id]?.[t] ? 0 : 1}); opacity: ${this.progress[this.activeExam.id]?.[t] ? 1 : 0.3}"> ${icons[t]}</span>`).join('');
   },
 
+  printSummary() {
+    const a = document.getElementById('print-area');
+    a.innerHTML = `
+      <div style="text-align:center"><h1 style="font-family:sans-serif">${this.activeExam.title} - Hızlı Konu Özeti</h1><p>Editör: Fatih PATIR</p></div><hr>
+      <div style="font-size:14pt; line-height:1.6; padding:20px; font-family:sans-serif;">${this.activeExam.summary.replace(/<br><br>/g, '<br><br><br>')}</div>
+    `;
+    window.print();
+  },
+
+  printOpenEnded() {
+    const a = document.getElementById('print-area');
+    let html = `<div style="text-align:center"><h1 style="font-family:sans-serif">${this.activeExam.title} - Açık Uçlu Sınav Soruları</h1><p>Editör: Fatih PATIR</p></div><hr>`;
+    html += this.activeExam.openEnded.map((q, i) => `
+      <div style="margin-bottom:25px; padding:15px; border-bottom:1px solid #eee; font-family:sans-serif;">
+        <strong style="font-size:13pt;">Soru ${i+1}: ${q.q}</strong><br><br>
+        <div style="font-size:12pt; color:#222;"><strong>Cevap:</strong> ${q.a}</div>
+      </div>
+    `).join('');
+    a.innerHTML = html;
+    window.print();
+  },
+
   printNotes() {
     const a = document.getElementById('print-area');
     let html = `<div style="text-align:center"><h1 style="font-family:sans-serif">${this.activeExam.title} - Grafik Canlandırma Notları</h1><p>Editör: Fatih PATIR</p></div><hr>`;
-    html += `<h2 style="margin-top:30px;">Açık Uçlu Sınav Soruları</h2>`;
-    html += this.activeExam.openEnded.map(q => `<div style="margin-bottom:20px; padding:15px; border-bottom:1px solid #ddd"><strong>🧠 ${q.q}</strong><br><br>💎 ${q.a}</div>`).join('');
-    html += `<h2 style="margin-top:30px;">Diğer Çalışma Soruları</h2>`;
-    html += this.activeExam.questions.map(q => `<div style="margin-bottom:20px; padding:15px; border-bottom:1px solid #ddd"><strong>📽️ ${q.q}</strong><br><br>💎 ${q.a}</div>`).join('');
+    html += `<h2 style="margin-top:30px; font-family:sans-serif;">Açık Uçlu Sınav Soruları</h2>`;
+    html += this.activeExam.openEnded.map(q => `<div style="margin-bottom:20px; padding:15px; border-bottom:1px solid #ddd; font-family:sans-serif;"><strong>🧠 ${q.q}</strong><br><br>💎 ${q.a}</div>`).join('');
+    html += `<h2 style="margin-top:30px; font-family:sans-serif;">Diğer Çalışma Soruları</h2>`;
+    html += this.activeExam.questions.map(q => `<div style="margin-bottom:20px; padding:15px; border-bottom:1px solid #ddd; font-family:sans-serif;"><strong>📽️ ${q.q}</strong><br><br>💎 ${q.a}</div>`).join('');
     a.innerHTML = html;
     window.print();
   },
